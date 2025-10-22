@@ -18,8 +18,16 @@ public class Cuenta {
 		mMovimientos=new ArrayList<>();
 	}
 
-public void ingresar(double x) {saldo=100.0;}
-public void retirar(double x) {saldo=150.0;}
+public void ingresar(double x) {
+	Movimiento m = new Movimiento(x,"Ingreso",Signo.H);
+    mMovimientos.add(m);
+    saldo += x;
+}
+public void retirar(double x) {
+	Movimiento m = new Movimiento(x,"Retirada",Signo.D);
+    mMovimientos.add(m);
+    saldo -= x;
+}
 
 public Double getSaldo() {
 	return saldo;
