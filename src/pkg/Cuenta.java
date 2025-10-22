@@ -9,12 +9,13 @@ public class Cuenta {
     String nTitular; 
     Double saldo;
     List <Movimiento> mMovimientos;
+    private static final double limite_descubierto=-500.0;
     
-	public Cuenta(String mNumero, String nTitular) {
+	public Cuenta(String mNumero, String nTitular, double saldoInicial) {
 		super();
 		this.mNumero = mNumero;
 		this.nTitular = nTitular;
-		saldo=0.0;
+		saldo=saldoInicial;
 		mMovimientos=new ArrayList<>();
 	}
 
@@ -23,10 +24,14 @@ public void ingresar(double x) {
     mMovimientos.add(m);
     saldo += x;
 }
-public void retirar(double x) {
+public void retirar(double x) throws FondosInsuficientesException{
+	if(saldo-x<limite_descubierto) {
+		throw new FondosInsuficientesException("Fondos insuficietes (saldo: "+saldo+"€ en la cuenta "+mNumero+" para el reintegro de "+x+"€");
+	}
 	Movimiento m = new Movimiento(x,"Retirada",Signo.D);
     mMovimientos.add(m);
     saldo -= x;
+    
 }
 
 public Double getSaldo() {
