@@ -1,5 +1,7 @@
 package pkg;
 
+import static org.junit.Assert.assertEquals;
+
 public class testCuenta {
 public void testIngresar() {
 	Cuenta c = new Cuenta("ES123", "Juan Pérez");
